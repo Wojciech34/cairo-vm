@@ -201,7 +201,7 @@ pub fn cairo_run_program(
     let mut hint_processor = Cairo1HintProcessor::new(
         &processor_hints,
         RunResources::default(),
-        cairo_run_config.copy_to_output(),
+        false,
     );
 
     // The bytecode includes all program instructions plus entry/footer,
@@ -278,7 +278,7 @@ pub fn cairo_run_program(
         result_inner_type_size,
         &runner.vm,
         builtin_count,
-        false,
+        cairo_run_config.copy_to_output(),
     )?;
 
     let serialized_output = if cairo_run_config.serialize_output {
