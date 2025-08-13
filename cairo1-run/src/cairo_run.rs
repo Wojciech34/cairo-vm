@@ -770,7 +770,7 @@ fn create_entry_code(
 //
 //                 EndInputCopy:
 //             };
-        }
+//         }
         // After we are done writing into the output segment, we can write the final output_ptr into locals:
         // The last instruction will write the final output ptr so we can find it in [ap - 1]
         let output_ptr = ctx.add_var(CellExpression::Deref(deref!([ap - 1])));
