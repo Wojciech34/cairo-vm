@@ -307,7 +307,7 @@ pub fn cairo_run_program(
 
     // Set stop pointers for builtins so we can obtain the air public input
     if cairo_run_config.finalize_builtins {
-        if false {
+        if cairo_run_config.copy_to_output() {
             // Set stop pointer for each builtin
             runner.vm.builtins_final_stack_from_stack_pointer_dict(
                 &builtins
@@ -489,9 +489,9 @@ fn load_arguments(
     //  * 0
     //  * segment_arena_ptr + 3
     let mut ap_offset = runner.get_program().builtins_len();
-    if cairo_run_config.copy_to_output() {
-        ap_offset += runner.get_program().builtins_len() - 1;
-    }
+//     if cairo_run_config.copy_to_output() {
+//         ap_offset += runner.get_program().builtins_len() - 1;
+//     }
     if got_segment_arena {
         ap_offset += 4;
     }
