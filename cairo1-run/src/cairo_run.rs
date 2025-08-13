@@ -1070,7 +1070,7 @@ fn fetch_return_values(
 
         // Output Builtin will always be on segment 2
         let return_values =
-            vm.get_continuous_range((2, 3).into(), vm.get_segment_size(2).unwrap() - 3)?;
+            vm.get_continuous_range((2, 0).into(), vm.get_segment_size(2).unwrap())?;
         // Remove panic wrapper
         let (return_values, panic_flag) = if result_inner_type_size.is_none() {
             // return value is not a PanicResult
@@ -1084,7 +1084,8 @@ fn fetch_return_values(
         };
         // Take only the output (as the output segment will also contain the input)
         let output_len = return_values[0].get_int().unwrap().to_usize().unwrap() + 1;
-        let return_values = &return_values[0..output_len];
+        let start_idx = 3;
+        let return_values = &return_values[start_idx..output_len];
         // Return Ok or Err based on panic_flag
         if panic_flag {
             return Err(Error::RunPanic(
