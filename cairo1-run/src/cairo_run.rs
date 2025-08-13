@@ -201,7 +201,7 @@ pub fn cairo_run_program(
     let mut hint_processor = Cairo1HintProcessor::new(
         &processor_hints,
         RunResources::default(),
-        false,
+        cairo_run_config.copy_to_output(),
     );
 
     // The bytecode includes all program instructions plus entry/footer,
@@ -307,7 +307,7 @@ pub fn cairo_run_program(
 
     // Set stop pointers for builtins so we can obtain the air public input
     if cairo_run_config.finalize_builtins {
-        if cairo_run_config.copy_to_output() {
+        if false {
             // Set stop pointer for each builtin
             runner.vm.builtins_final_stack_from_stack_pointer_dict(
                 &builtins
